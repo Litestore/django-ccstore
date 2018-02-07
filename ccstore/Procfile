@@ -1,0 +1,3 @@
+django: python manage.py runserver
+celery: celery -A ccstore --autoscale=2,4 --loglevel=INFO worker
+celerybeat: celery -A ccstore --loglevel=INFO beat

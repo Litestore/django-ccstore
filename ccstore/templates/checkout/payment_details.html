@@ -1,0 +1,39 @@
+{% extends "checkout/payment_details.html" %}
+{% load i18n %}
+{% load qr_tags %}
+{% load currency_filters %}
+
+{% block checkout_nav %}
+    {% include 'checkout/nav.html' with step=3 %}
+{% endblock %}
+
+{% block payment_details_content %}
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="well text-center">
+            <form action="{% url 'checkout:preview' %}" class="form-stacked" method="POST">
+                {% csrf_token %}
+                <p>{% trans "Please send <strong>exactly</strong>" %}</p>
+                <h3>{{ payment.amount }} {{ payment.currency }}</h3>
+                <p>{% trans "To the following wallet address" %}</p>
+                <p>
+                    <div class="input-group">
+                        <input id="wallet-address" class="form-control" type="text" value="{{ payment.address.address }}" readonly="readonly" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-copy" type="button" data-clipboard-target="#wallet-address">
+                                <span class="glyphicon glyphicon-send"></span>&nbsp;
+                            </button>
+                        </span>
+                    </div>
+                </p>
+                <p>{% qr_from_text user.proxywallet.wallet.get_address.address "m" %}</p>
+                <p>
+                    <button type="submit" value="{% trans "Continue" %}" class="btn btn-primary btn-large">
+                    {% trans "I have sent the payment!" %}
+                    </button>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock payment_details_content %}

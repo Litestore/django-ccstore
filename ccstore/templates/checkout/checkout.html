@@ -1,0 +1,49 @@
+{% extends "checkout/checkout.html" %}
+
+{% load i18n %}
+{% load qr_tags %}
+{% load currency_filters %}
+
+{% block payment_method %}
+    <div class="col-sm-6">
+        <div class="sub-header">
+            <h2>{% trans "Payment" %}</h2>
+        </div>
+        <div class="well">
+            <a href="{% url 'checkout:payment-details' %}" class="pull-right">
+                {% trans "Change" %}
+            </a>
+            <h3>{% trans "Payment" %}</h3>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-warning">
+                        {{ payment.get_status_display }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>Amount to send</strong>
+                    <p>{{ payment.amount }} {{ payment.currency }}</p>
+                    <br />
+                    <strong>Payment Address</strong>
+                    <p>{{ user.proxywallet.wallet.get_address.address }}</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <p>{% qr_from_text user.proxywallet.wallet.get_address.address "m" %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock payment_method %}

@@ -1,0 +1,4 @@
+. requirements.txt
+honcho
+flake8
+pytest

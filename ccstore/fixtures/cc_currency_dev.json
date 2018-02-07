@@ -1,0 +1,13 @@
+[
+{
+  "model": "cc.currency",
+  "pk": "LTC",
+  "fields": {
+    "label": "Litecoin",
+    "magicbyte": "48,111",
+    "last_block": 0,
+    "api_url": "http://user:pass@litecoin-server:19333",
+    "dust": "0.00005430"
+  }
+}
+]

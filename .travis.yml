@@ -10,7 +10,8 @@ before_script:
   - pip install flake8
 
 install:
-  - docker-compose up --build
+  - docker-compose up --build -d
+  - docker-compose run runserver sh -c "make build_sandbox"
 
 script:
   - docker ps | grep -q djangoccstore

@@ -1,5 +1,7 @@
 # CCStore
 
+[![Build Status](https://travis-ci.org/Litestore/django-ccstore.svg?branch=master)](https://travis-ci.org/Litestore/django-ccstore)
+
 CCStore is the core of Litestore, an open source e-commerce project that supports Litecoin as default payment option.
 
 It can work with any bitcoind-based cryptocurrencies and it is built on top of Django, channels, django-oscar and django-cc.

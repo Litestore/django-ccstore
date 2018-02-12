@@ -1,4 +1,3 @@
-import json
 import codecs
 import datetime
 import uuid
@@ -13,8 +12,6 @@ from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 
 from cc.models import Wallet, Operation
-
-from oscar.core.utils import get_default_currency
 
 from . import rpc_pb2 as ln
 from . import rpc_pb2_grpc as lnrpc

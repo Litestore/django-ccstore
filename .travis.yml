@@ -1,0 +1,17 @@
+language: python
+
+python:
+  - 3.5
+
+services:
+  - docker
+
+before_script:
+  - pip install flake8
+
+install:
+  - docker-compose up --build
+
+script:
+  - docker ps | grep -q djangoccstore
+  - flake8 ccstore/

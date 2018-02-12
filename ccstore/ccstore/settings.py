@@ -11,8 +11,12 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-from decouple import config, Csv
+import dj_database_url
 from datetime import timedelta
+from decimal import Decimal
+from decouple import config, Csv
+from oscar import get_core_apps, OSCAR_MAIN_TEMPLATE_DIR
+from oscar.defaults import *  # noqa: F401,F403
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,8 +32,6 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv(str), default='*')
 
 
 # Application definition
-
-from oscar import get_core_apps
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -72,7 +74,6 @@ WSGI_APPLICATION = 'ccstore.wsgi.application'
 
 
 # Database
-import dj_database_url
 
 DATABASES = {
     'default': {
@@ -127,8 +128,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = config('MEDIA_URL', default='/media/')  # For local development only.
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-from oscar import OSCAR_MAIN_TEMPLATE_DIR
 
 TEMPLATES = [
     {
@@ -211,8 +210,6 @@ CACHES = {
 
 # Oscar
 
-from oscar.defaults import *
-
 OSCAR_SHOP_NAME = config('OSCAR_SHOP_NAME', default='CCStore')
 OSCAR_DEFAULT_CURRENCY = config('OSCAR_DEFAULT_CURRENCY', 'EUR')
 OSCAR_ALLOW_ANON_CHECKOUT = False  # Force to False for now.
@@ -225,8 +222,6 @@ OSCAR_ORDER_STATUS_PIPELINE = {
 }
 
 # Django CC
-
-from decimal import Decimal
 
 CC_CONFIRMATIONS = config('CC_CONFIRMATIONS', default=2, cast=int)
 CC_ADDRESS_QUEUE = config('CC_ADDRESS_QUEUE', default=20, cast=int)
@@ -282,6 +277,6 @@ if DEBUG:
 # Local settings
 
 try:
-    from .settings_local import *
+    from .settings_local import *  # noqa: F401,F403
 except ImportError:
     pass

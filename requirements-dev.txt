@@ -1,4 +1,5 @@
-. requirements.txt
+-r requirements.txt
 honcho
 flake8
 pytest
+pytest-django

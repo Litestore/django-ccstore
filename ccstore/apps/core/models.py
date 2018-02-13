@@ -6,9 +6,8 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
-from django.dispatch import receiver
+
 from django.utils.timezone import now
-from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 
 from cc.models import Wallet, Operation
@@ -173,21 +172,3 @@ class LightningPayment(models.Model):
         else:
             # Payment not received
             return False
-
-
-# Signals receivers
-
-@receiver(post_save, sender=User)
-def create_user_wallet(sender, instance, created, **kwargs):
-    if created:
-        currency = get_default_currency()
-        wallet = Wallet.objects.create(currency=currency)
-        UserProxyWallet.objects.create(user=instance, wallet=wallet)
-
-
-@receiver(post_save, sender=Site)
-def create_site_wallet(sender, instance, created, **kwargs):
-    if created:
-        currency = get_default_currency()
-        wallet = Wallet.objects.create(currency=currency)
-        SiteProxyWallet.objects.create(site=instance, wallet=wallet)

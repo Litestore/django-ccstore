@@ -118,7 +118,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = config('STATIC_URL', default='/static/')
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = config('STATIC_ROOT', default=os.path.join(BASE_DIR, 'staticfiles'))
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
@@ -126,7 +126,7 @@ STATICFILES_DIRS = [
 # Media uploads
 
 MEDIA_URL = config('MEDIA_URL', default='/media/')  # For local development only.
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = config('MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
 
 
 TEMPLATES = [

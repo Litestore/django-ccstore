@@ -61,7 +61,7 @@ To run CCStore on testnet, you can run the following command:
 docker-compose -p ccstore_testnet -f docker-compose-testnet.yml up --build
 ```
 
-And follow the same installing procedure as described above, adding the -f option to specify which docker-compose settings file to use.
+And follow the same installing procedure as described above, adding the -f option to specify which docker-compose settings file to use and -p as project name prefix.
 
 ## Contributing
 

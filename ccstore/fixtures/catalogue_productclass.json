@@ -1,0 +1,24 @@
+[
+{
+  "model": "catalogue.productclass",
+  "pk": 1,
+  "fields": {
+    "name": "Collectible Item",
+    "slug": "audio-cd-vinyl-cassette",
+    "requires_shipping": true,
+    "track_stock": true,
+    "options": []
+  }
+},
+{
+  "model": "catalogue.productclass",
+  "pk": 2,
+  "fields": {
+    "name": "Digital Download",
+    "slug": "digital-download",
+    "requires_shipping": false,
+    "track_stock": false,
+    "options": []
+  }
+}
+]

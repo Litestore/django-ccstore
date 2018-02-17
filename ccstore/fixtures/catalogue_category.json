@@ -1,0 +1,80 @@
+[
+{
+  "model": "catalogue.category",
+  "pk": 2,
+  "fields": {
+    "path": "0002",
+    "depth": 1,
+    "numchild": 1,
+    "name": "Music",
+    "description": "",
+    "image": "",
+    "slug": "music"
+  }
+},
+{
+  "model": "catalogue.category",
+  "pk": 3,
+  "fields": {
+    "path": "00020001",
+    "depth": 2,
+    "numchild": 4,
+    "name": "Recorded Music",
+    "description": "",
+    "image": "",
+    "slug": "recorded-music"
+  }
+},
+{
+  "model": "catalogue.category",
+  "pk": 4,
+  "fields": {
+    "path": "000200010004",
+    "depth": 3,
+    "numchild": 0,
+    "name": "CDs",
+    "description": "",
+    "image": "",
+    "slug": "cds"
+  }
+},
+{
+  "model": "catalogue.category",
+  "pk": 5,
+  "fields": {
+    "path": "000200010003",
+    "depth": 3,
+    "numchild": 0,
+    "name": "Cassettes",
+    "description": "",
+    "image": "",
+    "slug": "cassettes"
+  }
+},
+{
+  "model": "catalogue.category",
+  "pk": 6,
+  "fields": {
+    "path": "000200010002",
+    "depth": 3,
+    "numchild": 0,
+    "name": "Vinyl Records",
+    "description": "",
+    "image": "",
+    "slug": "vinyl-records"
+  }
+},
+{
+  "model": "catalogue.category",
+  "pk": 7,
+  "fields": {
+    "path": "000200010001",
+    "depth": 3,
+    "numchild": 0,
+    "name": "Other Formats",
+    "description": "",
+    "image": "",
+    "slug": "other-formats"
+  }
+}
+]

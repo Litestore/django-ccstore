@@ -1,0 +1,11 @@
+[
+{
+  "model": "partner.partner",
+  "pk": 1,
+  "fields": {
+    "code": "ccstore",
+    "name": "CCStore",
+    "users": []
+  }
+}
+]

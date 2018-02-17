@@ -53,13 +53,13 @@ services:
     image: redis:alpine
     restart: always
     ports:
-      - "6379:6379"
+      - "6379"
   litecoin:
     image: uphold/litecoin-core
     ports:
-      - "19333:19333"
+      - "19333"
       - "19334:19334"
-      - "30000:30000"
+#     - "30000"
     command:
       -printtoconsole
       -regtest=1

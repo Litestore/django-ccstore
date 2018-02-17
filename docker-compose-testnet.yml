@@ -1,0 +1,88 @@
+version: '3'
+services:
+  runserver:
+    build: .
+    links:
+      - "db:database"
+      - "redis:redis-server"
+    ports:
+      - "8000:8000"
+    env_file: ./docker/python-test.env
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./docker/.staticfiles-test:/app/ccstore/staticfiles
+      - ./docker/.media-test:/app/ccstore/media
+    command: /usr/local/bin/python manage.py runserver 0.0.0.0:8000
+  celery:
+    build: .
+    links:
+      - "db:database"
+      - "redis:redis-server"
+      - "litecoin:litecoin-server"
+    env_file: ./docker/python-test.env
+    depends_on:
+      - db
+      - redis
+      - litecoin
+    command: /usr/local/bin/celery -A ccstore --loglevel=INFO worker
+  celerybeat:
+    build: .
+    links:
+      - "db:database"
+      - "redis:redis-server"
+#     - "eclair:lightning-server"
+    env_file: ./docker/python-test.env
+    depends_on:
+      - db
+      - redis
+    command: /usr/local/bin/celery -A ccstore --loglevel=INFO beat
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432"
+    volumes:
+      - ./docker/.postgres-test-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=testuser
+      - POSTGRES_PASS=testpass
+      - POSTGRES_DB=ccstore-test
+  redis:
+    image: redis:alpine
+    restart: always
+    ports:
+      - "6379"
+  litecoin:
+    image: uphold/litecoin-core
+    ports:
+      - "19333"
+      - "19334:19334"
+#     - "30000"
+    command:
+      -printtoconsole
+      -testnet=1
+      -rpchost=0.0.0.0
+      -rpcuser=user
+      -rpcpassword=pass
+      -rpcport=19333
+      -rpcssl=0
+      -rpcallowip=::/0
+      -port=19334
+      -discover=1
+      -server=1
+      -txindex=1
+#     -zmqpubrawblock=tcp://0.0.0.0:30000
+#     -zmqpubrawtx=tcp://0.0.0.0:30000
+    volumes:
+      - ./docker/.litecoin:/home/litecoin/.litecoin
+#   eclair:
+#     image: acinq/eclair
+#     links:
+#       - "litecoin:litecoin-server"
+#     env_file: ./docker/eclair-dev.env
+#     ports:
+#       - "19735:19735"
+#     depends_on:
+#       - litecoin

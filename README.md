@@ -53,6 +53,16 @@ docker-compose run runserver sh -c "python manage.py createsuperuser"
 And then you can access Oscar's dashboard admin by opening [http://127.0.0.1:8000/dashboard/](http://127.0.0.1:8000/dashboard/).
 
 
+### Testnet
+
+To run CCStore on testnet, you can run the following command:
+
+```
+docker-compose -p ccstore_testnet -f docker-compose-testnet.yml up --build
+```
+
+And follow the same installing procedure as described above, adding the -f option to specify which docker-compose settings file to use.
+
 ## Contributing
 
 Please read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for details on project's code of conduct.

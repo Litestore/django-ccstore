@@ -57,7 +57,10 @@ PAYMENT_STATUS_CHOICES = (
 
 
 def _default_currency():
-    return get_default_currency().ticker
+    currency = get_default_currency()
+    if currency:
+        return currency.ticker
+    return ''
 
 
 class AbstractPayment(models.Model):

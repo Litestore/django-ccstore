@@ -1,3 +1,5 @@
+import logging
+
 from oscar.core.loading import get_model
 from oscar.apps.checkout.views import PaymentDetailsView as OscarPaymentDetailsView
 
@@ -10,7 +12,16 @@ Source = get_model('payment', 'Source')
 SourceType = get_model('payment', 'SourceType')
 
 
+logger = logging.getLogger('ccstore')
+
+
 class PaymentDetailsView(OscarPaymentDetailsView):
+    def handle_place_order_submission(self, request):
+        submission = self.build_submission()
+        payment = submission.pop('payment')
+        logger.info('Payment #{} order submission.'.format(payment.id))
+        return self.submit(**submission)
+
     def handle_payment(self, order_number, total, **kwargs):
         payment = PaymentFacade().check_order_payment(order_number, self.request.user)
         source_type, created = SourceType.objects.get_or_create(name='ccstore')

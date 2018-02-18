@@ -20,6 +20,9 @@ class PaymentDetailsView(OscarPaymentDetailsView):
         submission = self.build_submission()
         payment = submission.pop('payment')
         logger.info('Payment #{} order submission.'.format(payment.id))
+        payment.check_payment(save=False)
+        if payment.status == 'expired':
+            payment.save()
         return self.submit(**submission)
 
     def handle_payment(self, order_number, total, **kwargs):

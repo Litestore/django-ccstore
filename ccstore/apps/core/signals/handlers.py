@@ -11,6 +11,9 @@ from apps.core.util import get_default_currency
 User = get_user_model()
 
 
+__all__ = ('create_user_wallet', 'create_site_wallet')
+
+
 @receiver(post_save, sender=User)
 def create_user_wallet(sender, instance, created, **kwargs):
     if created:

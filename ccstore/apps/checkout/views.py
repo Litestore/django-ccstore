@@ -16,12 +16,22 @@ logger = logging.getLogger('ccstore')
 
 
 class PaymentDetailsView(OscarPaymentDetailsView):
+    def submit(self, **kwargs):
+        try:
+            payment = kwargs.pop('payment')
+        except KeyError:
+            payment = None
+        if payment:
+            logger.info('Payment #{} order submitted.'.format(payment.id))
+        return super().submit(**kwargs)
+
     def handle_place_order_submission(self, request):
         submission = self.build_submission()
-        payment = submission.pop('payment')
+        payment = self.get_context_data()['payment']
         logger.info('Payment #{} order submission.'.format(payment.id))
         payment.check_payment(save=False)
         if payment.status == 'expired':
+            logger.info('Payment #{} order expired.'.format(payment.id))
             payment.save()
         return self.submit(**submission)
 

@@ -19,7 +19,7 @@ constantly==15.1.0
 cryptocompare==0.3
 cryptography==2.1.4
 daphne==1.4.2
-Django==1.11.9
+Django==1.11.23
 -e git+https://github.com/limpbrains/django-cc.git@80cd0027790bc7e3319736bc57c6c54849e16419#egg=django_cc
 django-extra-views==0.6.4
 django-haystack==2.6.1

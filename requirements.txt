@@ -17,7 +17,7 @@ channels==1.1.8
 chardet==3.0.4
 constantly==15.1.0
 cryptocompare==0.3
-cryptography==2.1.4
+cryptography==3.2
 daphne==1.4.2
 Django==1.11.9
 -e git+https://github.com/limpbrains/django-cc.git@80cd0027790bc7e3319736bc57c6c54849e16419#egg=django_cc
